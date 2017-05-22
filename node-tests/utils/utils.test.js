@@ -7,10 +7,6 @@ it('should add two numbers', () => {
   expect(res).toBe(44).toBeA('number');
 });
 
-it('should square a number', () => {
-  var res = utils.square(4);
-  expect(res).toBe(16).toBeA('number');
-})
 
 it('should verify first name and last names are set', () => {
   var user = {
@@ -20,5 +16,21 @@ it('should verify first name and last names are set', () => {
   expect(returnedUser).toInclude({
     firstName: 'Robert',
     lastName: 'Saunders'
+  });
+});
+
+//have to add the async param
+it('should async add two numbers', (done) => {
+  utils.asyncAdd(4,3,(sum) => {
+    expect(sum).toBe(7).toBeA('number');
+    done();
+  });
+});
+
+//have to add the async param
+it('should async square a number', (done) => {
+  utils.square(4,(sum) => {
+    expect(sum).toBe(16).toBeA('number');
+    done();
   });
 });

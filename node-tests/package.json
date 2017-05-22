@@ -7,7 +7,9 @@
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.15.3"
+  },
   "devDependencies": {
     "expect": "^1.20.2",
     "mocha": "^3.4.1"
