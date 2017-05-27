@@ -3,6 +3,7 @@ const { Todo } = require('./models/todo');
 const { User } = require('./models/user');
 const express = require('express');
 const bodyParser = require('body-parser');
+const { ObjectID } = require('mongodb');
 
 var app = express();
 
@@ -25,6 +26,24 @@ app.get('/todos', (req, res) => {
   }, (e) => {
     res.status(400).send(e);
   })
+});
+
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id;
+  if (!ObjectID.isValid(id)) {
+    console.log('This id is not valid!');
+  } else {
+    Todo.findById(req.params.id).then((todo) => {
+      if(todo) {
+        res.send({todo});
+      } else {
+        return res.status(404).send({});
+      }
+    }, (e) => {
+      res.status(400).send(e);
+    })
+  }
+
 });
 
 app.listen(3000, () => {
